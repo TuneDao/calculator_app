@@ -1,5 +1,7 @@
+import 'package:calculator_app/bloc/calculator_bloc.dart';
 import 'package:calculator_app/provider/calculator_provider.dart';
 import 'package:calculator_app/screen/calculator_screen.dart';
+import 'package:calculator_app/screen/calculator_screen_bloc.dart';
 import 'package:calculator_app/screen/calculator_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,15 +24,24 @@ class MainApp extends StatelessWidget {
     // );
 
     // ============ Using Provider for dependency injection ===========
-    return ChangeNotifierProvider(
-      create: (_) => CalculatorProvider(),
-      child: MaterialApp(
-        title: 'Calculator',
-        theme: ThemeData.dark(),
-        home: CalculatorScreenProvider(),
-      ),
-    );
+    // return ChangeNotifierProvider(
+    //   create: (_) => CalculatorProvider(),
+    //   child: MaterialApp(
+    //     title: 'Calculator',
+    //     theme: ThemeData.dark(),
+    //     home: CalculatorScreenProvider(),
+    //   ),
+    // );
 
     // ============ Using BloC for dependency injection ===========
+    return MaterialApp(
+      title: 'Calculator',
+      theme: ThemeData.dark(),
+      home: BlocProvider(
+        create: (context) =>
+            CalculatorBloc(), // Cung cấp CalculatorBloc cho cây widget
+        child: CalculatorScreen(),
+      ),
+    );
   }
 }
